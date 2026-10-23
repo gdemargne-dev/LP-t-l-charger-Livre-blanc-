@@ -75,39 +75,50 @@
 
         <h2 class="form-card__title">Pour télécharger<br>le livre blanc&nbsp;!</h2>
 
-        <form id="lead-form" novalidate>
+        <!-- Formulaire web Zoho CRM « LIVRE BLANC ANNONCE VEFA » (module Prospects).
+             Les champs cachés ci-dessous viennent du code source Zoho : ne pas les modifier. -->
+        <form id="lead-form" action="https://crm.zoho.com/crm/WebToLeadForm" method="POST" accept-charset="UTF-8" target="zoho-target" novalidate>
+          <input type="hidden" name="xnQsjsdp" value="b40f155948cda5572b421dd84efe9aad03f75418e066bce815e18494eee729a2">
+          <input type="hidden" name="zc_gad" id="zc_gad" value="">
+          <input type="hidden" name="xmIwtLD" value="050d3f2b2a0a6c832aca48327ee90992275f9af62e2ffa7d79091be489d551f6729963630cd06b353b94206caac89e18">
+          <input type="hidden" name="actionType" value="TGVhZHM=">
+          <input type="hidden" name="returnURL" value="null">
+          <input type="hidden" name="Lead Source" value="Livre blanc annonce VEFA">
+          <input type="hidden" name="Mobile" id="mobile-complet" value="">
+          <input type="text" name="aG9uZXlwb3Q" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+
           <div class="field">
             <label for="nom">Nom<span>*</span></label>
-            <input type="text" id="nom" name="nom" autocomplete="family-name" required>
+            <input type="text" id="nom" name="Last Name" maxlength="80" autocomplete="family-name" required>
           </div>
           <div class="field">
             <label for="prenom">Prénom<span>*</span></label>
-            <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+            <input type="text" id="prenom" name="First Name" maxlength="40" autocomplete="given-name" required>
           </div>
           <div class="field">
             <label for="email">E-mail professionnel<span>*</span></label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
+            <input type="email" id="email" name="Email" maxlength="100" autocomplete="email" required>
           </div>
           <div class="field">
             <label for="telephone">Numéro de téléphone<span>*</span></label>
             <div class="tel">
-              <select id="indicatif" name="indicatif" aria-label="Indicatif pays">
+              <select id="indicatif" aria-label="Indicatif pays">
                 <option value="+33" selected>🇫🇷 +33</option>
                 <option value="+32">🇧🇪 +32</option>
                 <option value="+41">🇨🇭 +41</option>
                 <option value="+352">🇱🇺 +352</option>
                 <option value="+377">🇲🇨 +377</option>
               </select>
-              <input type="tel" id="telephone" name="telephone" autocomplete="tel-national" placeholder="6 12 34 56 78" required>
+              <input type="tel" id="telephone" maxlength="20" autocomplete="tel-national" placeholder="6 12 34 56 78" required>
             </div>
           </div>
           <div class="field">
             <label for="societe">Société<span>*</span></label>
-            <input type="text" id="societe" name="societe" autocomplete="organization" required>
+            <input type="text" id="societe" name="Company" maxlength="200" autocomplete="organization" required>
           </div>
           <div class="field">
             <label for="fonction">Fonction</label>
-            <select id="fonction" name="fonction">
+            <select id="fonction" name="Designation">
               <option value="">Sélectionnez…</option>
               <option>Direction commerciale</option>
               <option>Direction marketing / communication</option>
@@ -119,7 +130,7 @@
           </div>
 
           <label class="consent">
-            <input type="checkbox" name="consentement" id="consentement" required>
+            <input type="checkbox" id="consentement" required>
             <span>J'accepte que mes données soient utilisées par Arlynk pour m'envoyer le livre blanc et me recontacter. <a href="https://arlynk.com/politique-de-confidentialite/" target="_blank" rel="noopener">Politique de confidentialité</a><span class="req">*</span></span>
           </label>
 
@@ -133,11 +144,12 @@
 
           <button type="submit" class="btn-submit">Recevoir le livre blanc</button>
         </form>
+        <iframe name="zoho-target" id="zoho-target" title="Envoi du formulaire" hidden></iframe>
 
         <div class="form-success" id="form-success" hidden>
           <svg width="56" height="56" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#c1164b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <h3>Merci&nbsp;!</h3>
-          <p>Votre livre blanc «&nbsp;L'annonce VEFA qui génère des contacts&nbsp;» est prêt.</p>
+          <p>Vous allez recevoir le livre blanc «&nbsp;L'annonce VEFA qui génère des contacts&nbsp;» par e-mail. Vous pouvez aussi le télécharger dès maintenant.</p>
           <a class="btn-submit" id="download-link" href="assets/livre-blanc-annonce-vefa.pdf" download>Télécharger le PDF</a>
         </div>
       </div>
@@ -180,5 +192,7 @@
   </footer>
 
   <script src="assets/js/form.js"></script>
+  <!-- Suivi des formulaires web Zoho CRM (fourni par Zoho, à conserver) -->
+  <script id="wf_anal" src="https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=6239499811e1ef2fe79d4553c140f93b8720ca6e53563f2c5904405ecd4b16bab45c5370727189488b1ed2f7dff920f7gid4288a362279f1db282c85e5dd8dd022d77e0adbdd05946a8cc1e4c8baf54dbe6gida3c11426cd7f3b9895a1c88625636addba5137b5bd323523fe3a65d7bd6ad8c6gid12b6d52075e14c5dc99a153dd21b845de30f58ea530f7a358307c63f73d1db31&tw=bd8365c8fe3bd1d9c908581f7e484557f434fdd48e465106fef60573b287a3ee&version=v2"></script>
 </body>
 </html>

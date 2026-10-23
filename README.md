@@ -11,15 +11,21 @@ Landing page de téléchargement du livre blanc Arlynk, à la charte du site [ar
 - `assets/img/` : logos Arlynk et couverture du livre blanc
 - `assets/livre-blanc-annonce-vefa.pdf` : le livre blanc proposé au téléchargement
 
-## Brancher la collecte des leads
+## Collecte des leads (Zoho CRM)
 
-Dans `assets/js/form.js`, renseigner `FORM_ENDPOINT` avec l'URL qui reçoit les leads
-(formulaire Zoho CRM, Brevo, webhook Zapier/Make…). Les données sont envoyées en POST JSON :
-`nom`, `prenom`, `email`, `indicatif`, `telephone`, `telephone_complet`, `societe`, `fonction`,
-`consentement`, `source`, `page`.
+Le formulaire envoie les prospects au formulaire web Zoho CRM « LIVRE BLANC ANNONCE VEFA »
+(module Prospects, `https://crm.zoho.com/crm/WebToLeadForm`). Les identifiants du formulaire
+(`xnQsjsdp`, `xmIwtLD`, `actionType`) sont dans `index.html` : ne pas les modifier.
 
-Tant que `FORM_ENDPOINT` est vide, le formulaire est validé côté navigateur puis affiche directement
-le bouton de téléchargement du PDF (aucune donnée n'est enregistrée).
+Champs envoyés : `Last Name`, `First Name`, `Email`, `Mobile` (indicatif + numéro), `Company`,
+`Designation` (fonction) et `Lead Source` = « Livre blanc annonce VEFA ». C'est cette origine qui
+sert de condition à la règle Zoho qui envoie le livre blanc par e-mail.
+
+Zoho n'accepte pas les envois en JavaScript depuis un autre site : `assets/js/form.js` valide le
+formulaire, l'envoie vers une iframe cachée, puis affiche le message de remerciement.
+
+Si le formulaire est recréé dans Zoho, reprendre les nouvelles valeurs des champs cachés depuis
+son code source.
 
 ## Aperçu local
 

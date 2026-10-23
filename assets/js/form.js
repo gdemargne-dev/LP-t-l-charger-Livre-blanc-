@@ -1,12 +1,14 @@
-// Formulaire de téléchargement du livre blanc.
-// Renseigner FORM_ENDPOINT avec l'URL de collecte des leads (Zoho CRM, Brevo, webhook Zapier/Make…).
-// Les données sont envoyées en POST (JSON). Laissé vide, le formulaire affiche directement le lien de téléchargement.
-const FORM_ENDPOINT = "";
+// Formulaire de téléchargement du livre blanc, relié au formulaire web Zoho CRM « LIVRE BLANC ANNONCE VEFA ».
+// Zoho n'accepte pas les envois en JavaScript (fetch) depuis un autre site : le formulaire est envoyé
+// normalement vers une iframe cachée, puis la page affiche son propre message de remerciement.
+// Les prospects arrivent dans Zoho avec « Origine du Prospect = Livre blanc annonce VEFA ».
 
 (function () {
   const form = document.getElementById("lead-form");
+  const iframe = document.getElementById("zoho-target");
   const errorBox = document.getElementById("form-error");
   const success = document.getElementById("form-success");
+  const button = form.querySelector("button[type=submit]");
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const TEL_RE = /^[0-9 .\-()]{6,20}$/;
 
@@ -25,6 +27,15 @@ const FORM_ENDPOINT = "";
     el.setAttribute("aria-invalid", ok ? "false" : "true");
   }
 
+  function visibleFields() {
+    return form.querySelectorAll("input:not([type=hidden]):not([name=aG9uZXlwb3Q]), select");
+  }
+
+  function showSuccess() {
+    form.hidden = true;
+    success.hidden = false;
+  }
+
   form.addEventListener("input", function (e) {
     if (e.target.getAttribute("aria-invalid") === "true") mark(e.target, isValid(e.target));
   });
@@ -32,10 +43,10 @@ const FORM_ENDPOINT = "";
     if (e.target.type === "checkbox") mark(e.target, isValid(e.target));
   });
 
-  form.addEventListener("submit", async function (e) {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
     let firstInvalid = null;
-    form.querySelectorAll("input, select").forEach(function (el) {
+    visibleFields().forEach(function (el) {
       const ok = isValid(el);
       mark(el, ok);
       if (!ok && !firstInvalid) firstInvalid = el;
@@ -47,32 +58,24 @@ const FORM_ENDPOINT = "";
     }
     errorBox.hidden = true;
 
-    const data = Object.fromEntries(new FormData(form).entries());
-    data.telephone_complet = data.indicatif + " " + data.telephone;
-    data.source = "LP livre blanc - L'annonce VEFA qui génère des contacts";
-    data.page = window.location.href;
+    // Zoho reçoit le numéro complet, indicatif compris, dans le champ « Portable ».
+    const tel = document.getElementById("telephone").value.trim().replace(/^0/, "");
+    document.getElementById("mobile-complet").value = document.getElementById("indicatif").value + " " + tel;
 
-    if (FORM_ENDPOINT) {
-      const button = form.querySelector("button[type=submit]");
-      button.disabled = true;
-      button.textContent = "Envoi en cours…";
-      try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
-        if (!res.ok) throw new Error(res.status);
-      } catch (err) {
-        button.disabled = false;
-        button.textContent = "Recevoir le livre blanc";
-        errorBox.textContent = "Une erreur est survenue, merci de réessayer ou de nous écrire à hello@arlynk.com.";
-        errorBox.hidden = false;
-        return;
-      }
+    button.disabled = true;
+    button.textContent = "Envoi en cours…";
+
+    // La réponse de Zoho (dans l'iframe) n'est pas lisible depuis la page : on affiche le remerciement
+    // dès qu'elle est chargée, avec un délai maximum au cas où l'événement n'arrive pas.
+    let done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      showSuccess();
     }
+    iframe.addEventListener("load", finish, { once: true });
+    setTimeout(finish, 6000);
 
-    form.hidden = true;
-    success.hidden = false;
+    HTMLFormElement.prototype.submit.call(form);
   });
 })();

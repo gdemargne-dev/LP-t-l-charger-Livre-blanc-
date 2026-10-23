@@ -27,6 +27,15 @@ formulaire, l'envoie vers une iframe cachée, puis affiche le message de remerci
 Si le formulaire est recréé dans Zoho, reprendre les nouvelles valeurs des champs cachés depuis
 son code source.
 
+## Mise en ligne
+
+La page est publiée avec GitHub Pages sur `https://livre-blanc.arlynk.com` (fichier `CNAME`).
+
+1. GitHub → Settings → Pages : Source « Deploy from a branch », branche
+   `claude/landing-page-vefa-whitepaper-x4j99x`, dossier `/ (root)`.
+2. DNS de arlynk.com : enregistrement `CNAME` `livre-blanc` → `gdemargne-dev.github.io`.
+3. Une fois le domaine vérifié par GitHub, cocher « Enforce HTTPS ».
+
 ## Aperçu local
 
 Ouvrir `index.html` dans un navigateur, ou lancer `npx serve .` à la racine.

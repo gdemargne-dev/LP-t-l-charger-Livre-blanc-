@@ -44,7 +44,7 @@ Ouvrir `index.html` dans un navigateur, ou lancer `npx serve .` à la racine.
 
 # Landing page – Salon RENT 2026 (Styl'Ai)
 
-Page d'atterrissage de la campagne SMS invitant les prospects sur le stand Arlynk · Styl'Ai au salon
+Page d'atterrissage de la campagne SMS invitant les prospects sur le stand SF01 (Arlynk · Styl'Ai) au salon
 RENT 2026 (4 et 5 novembre, Paris Expo Porte de Versailles). Publiée sur
 `https://livre-blanc.arlynk.com/rent-2026/`.
 
@@ -55,7 +55,6 @@ RENT 2026 (4 et 5 novembre, Paris Expo Porte de Versailles). Publiée sur
 - `rent-2026/rent-2026-arlynk.ics` : invitation agenda (4 et 5 novembre)
 - `rent-2026/img/` : visuels Styl'Ai (avant/après) et logo
 
-À compléter : le numéro de stand dans le bloc « Qui » de `rent-2026/index.html` (commentaire en place).
 
 ## Formulaire (Zoho CRM)
 

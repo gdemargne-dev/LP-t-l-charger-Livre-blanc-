@@ -39,3 +39,34 @@ La page est publiée avec GitHub Pages sur `https://livre-blanc.arlynk.com` (fic
 ## Aperçu local
 
 Ouvrir `index.html` dans un navigateur, ou lancer `npx serve .` à la racine.
+
+---
+
+# Landing page – Salon RENT 2026 (Styl'Ai)
+
+Page d'atterrissage de la campagne SMS invitant les prospects sur le stand Arlynk · Styl'Ai au salon
+RENT 2026 (4 et 5 novembre, Paris Expo Porte de Versailles). Publiée sur
+`https://livre-blanc.arlynk.com/rent-2026/`.
+
+- `rent-2026/index.html` : la page (accroche, deux propositions, démo live, offre 990 € HT / 1 200 crédits,
+  prise de rendez-vous, contact)
+- `rent-2026/rent.css` : styles propres à la page, en complément de `assets/css/style.css`
+- `rent-2026/rent.js` : comparateurs avant/après, compte à rebours, bouton fixe mobile, formulaire
+- `rent-2026/rent-2026-arlynk.ics` : invitation agenda (4 et 5 novembre)
+- `rent-2026/img/` : visuels Styl'Ai (avant/après) et logo
+
+À compléter : le numéro de stand dans le bloc « Qui » de `rent-2026/index.html` (commentaire en place).
+
+## Formulaire (Zoho CRM)
+
+Le formulaire réutilise les identifiants du formulaire web Zoho du livre blanc, avec
+`Lead Source` = « Salon RENT 2026 » (la règle d'envoi du livre blanc ne se déclenche donc pas).
+Le jour, le moment et les centres d'intérêt sont regroupés dans le champ `Description`.
+
+À vérifier dans Zoho : la valeur « Salon RENT 2026 » doit exister dans la liste « Origine du prospect »,
+et le champ « Description » doit faire partie du formulaire web. Le plus propre est de créer un formulaire
+web dédié « SALON RENT 2026 » et de reporter ses champs cachés (`xnQsjsdp`, `xmIwtLD`, `actionType`)
+dans `rent-2026/index.html`.
+
+Pour suivre la campagne SMS, utiliser un lien du type
+`https://livre-blanc.arlynk.com/rent-2026/?utm_source=sms&utm_campaign=rent2026`.
